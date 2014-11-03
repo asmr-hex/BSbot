@@ -1,0 +1,14 @@
+% Introduction
+
+Content-free grammar has enabled several "almost-real" publication generators for several areas such as mathematics, computer science, and high-energy physics. Content-free grammar is a set of rules that are independent from the words (or phrases) they apply to. By defining a dictionary containing field-related keywords, and a set of rules similar to languages used in research publications, it can generate any number of publications. Famous examples of such generator is SCIgen, an automatic CS paper generator; snarXiv, a random high-energy theory paper generator similar to arXiv; the Real Theorem Generator for mathematical theorems, and Philosophy of the Day, a philosophy sentence generator.
+
+Both SCIgen and snarXiv have proved that human are not good at distinguishing computer-generated papers from real papers. One of the SCIgen-generated paper was accepted by WMSCI 2005, an influential multi-discipline conference in computer science, and snarXiv reports that classification between real paper titles and machine-generated titles by human is merely 59\%, slightly higher than random.
+
+Therefore, we aim to build a classification mechanism to distinguish machine-generated contents to real, human-produced contents. There are very few publications on this topic. A SCIgen paper detection method was described in this paper by using inter-textual distance (based on bag-of-words) and knn classification method. The author claims it should "hardly" misclassify, but no performance metric is given.
+
+% unfinished
+We focus on paper title and abstract because snarXiv can only generate these two parts. We have crawled and formatted \* arXiv papers and grouped into months, and generated \* snarXiv papers. Currently we use . The classification accuracy is .
+
+We plan to use for the next step, and explore performance variations across time.
+
+This report

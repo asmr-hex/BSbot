@@ -1,0 +1,57 @@
+\documentclass[11pt]{article}
+\usepackage{geometry}               
+\geometry{letterpaper}                
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{url}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+
+\begin{document}
+\clearpage
+\thispagestyle{empty}
+\vspace*{0px}
+\begin{center}
+	\textsc{10-701 Machine Learning, Fall 2014}\\
+	\large{Interim Report}\\
+	\vspace{10px}
+	\large{\emph{BSBot}: A Learning System to Detect Fraudulent Abstracts in High Energy Physics} \\
+	\vspace{10px}
+	\normalsize{ 
+		
+		Dustin Axman, daxman\\
+		Baihu Qian, bqian\\
+		Connor Walsh, connorw\\
+	 }
+
+\end{center}
+
+\section{Introduction}
+\input{introduction}
+
+%\section{Related Work}
+%\input{literature_review}
+
+\section{Data Acquisition}
+\input{data}
+
+\section{Approach}
+\subsection{Feature Selection}
+\input{feature}
+
+\subsection{Models}
+\input{model}
+
+
+\section{Preliminary Result}
+\input{result}
+
+\section{Conclusion and Future work}
+\input{conclusion}
+
+\bibliographystyle{plain}
+\bibliography{baihu}
+
+\end{document}

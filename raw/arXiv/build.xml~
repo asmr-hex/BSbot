@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="arXivCrawler" default="packageLatest" basedir=".">
+	<description>Custom build for arXivCrawler...</description>
+
+	<!-- Set up some global properties -->
+	<property name="SRC" location="src"/>
+	<property name="BIN" location="bin"/>
+	<property name="LIB" location="libs/jsoup-1.8.1.jar"/>
+	
+	<!-- create a jar of the latest source -->
+	<target name="packageLatest">
+		<antcall target="clean"/>
+		<antcall target="jarit"/>
+	</target>
+
+	<target name="init">
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${BIN}"/>
+	</target>
+	
+	<target name="compile" depends="init"
+		description="compile the source " >
+		<!-- Compile the java code from ${src} into ${build} -->
+		<javac includeAntRuntime="False" classpath="${LIB}"
+			srcdir="${SRC}" destdir="${BIN}">
+		</javac>
+	</target>
+
+	<!-- Create a a single Jar for the latest build -->
+	<target name="jarit" depends="compile">
+		<jar destfile="${BIN}/arXivCrawler.jar"
+			includes="${BIN}">
+			<fileset dir="${BIN}"/> 
+			<zipfileset src="libs/jsoup-1.8.1.jar" excludes="META-INF/**/*"/> 
+		</jar>
+	</target>
+	
+	<target name="clean"
+		description="clean up" >
+		<!-- Delete the ${bin} directory tree -->
+		<delete dir="${BIN}"/>
+	</target>
+</project>

@@ -1,0 +1,12 @@
+% data aquisition
+% Connor Walsh: 11/2/2014
+
+As no previously compiled dataset existed for the problem of interest, it was required that we collect and preprocess the relevant data by our own means. Despite the inconvenience, this allowed for flexibility in formatting and data selection obviating the need to filter irrelevant and superfluous data fields often found in inherited datasets. Consequently, we were able to produce conformed formatting across both positive and negative data samples. Here, we are primarily interested in the textual content of abstracts, both real and false,  and their accompanying titles.
+
+%----- snarXiv data acquisition ------------
+Acquiring negative data points involved obtaining, compiling, and executing the snarXiv generator code. The code is freely available courtesy of Whats-his-name (his-website) and includes a grammar file, \texttt{snarxiv.gram}, and a perl script, \texttt{compile-grammar.pl}, used to compile the final OCaml source, \texttt{snarxiv.ml}. Executing this program produces a single pseudo abstract with a title, list of authors, and subject header. Implementing our own extraction python script, \texttt{generateSnarXivData.py}, we were able to extract the titles and abstract bodies of any specified number of pseudo abstracts.
+
+%----- arXiv data acquisition --------------
+For the collection of our positive data points, it was necessary to mine honest abstracts from the theoretical high energy physics database of ArXiv. This required the development of a rudimentary web-crawler, \texttt{arXivCrawnler.java}, to chronologically gather a user defined number of data samples from the most recent to the oldest archive entries. The mean collection time ($n = 1000$) for a single sample is $0.427$ seconds with a standard deviation of $0.363$ seconds.
+
+The final results from both collection programs are stored in \texttt{.txt} files for each sample. Within each sample file, there is one word per line with the title and abstract bodies delimited by double forward slashes.
