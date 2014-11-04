@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  3 NOV 2014 13:50
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  4 NOV 2014 16:35
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -330,11 +330,11 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 10.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
-)) (./feature.tex
+)) (./feature.tex [2]
 
-LaTeX Warning: Citation `french' on page 2 undefined on input line 12.
+LaTeX Warning: Citation `french' on page 3 undefined on input line 12.
 
-) [2] (./model.tex) (./result.tex) (./conclusion.tex) (./report_main.bbl
+) (./model.tex) (./result.tex) (./conclusion.tex) (./report_main.bbl
 
 LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
@@ -360,7 +360,7 @@ Here is how much of TeX's memory you used:
  8924 multiletter control sequences out of 15000+200000
  10968 words of font info for 41 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 30i,4n,28p,739b,315s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 30i,4n,28p,916b,315s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb>
@@ -370,7 +370,7 @@ sr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr
 /local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/
 local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/l
 ocal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on report_main.pdf (3 pages, 113553 bytes).
+Output written on report_main.pdf (3 pages, 115058 bytes).
 PDF statistics:
  89 PDF objects out of 1000 (max. 8388607)
  74 compressed objects within 1 object stream

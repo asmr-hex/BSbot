@@ -10,7 +10,7 @@ function [scores] = scoreFeatures( histograms, labels, varargin)
 %                number of training datapoints.
 %           labels - F x N matrix which gives the positive or negative
 %                labels for each training example.
-%           plotON - optional argument to plot feature frequency histograms
+%           [plotON] - optional argument to plot feature frequency histograms
 %                    for visual validation. Must be boolean.
 %           [par] - Optional argument to run script in parallel using
 %                matlab pool.
@@ -19,27 +19,31 @@ function [scores] = scoreFeatures( histograms, labels, varargin)
 %                corresponds to the differential amplitude.
 
     % Check number of arguments
+    %By default we do not plot histograms
+    plotON = 0;
+    %By default we do not run in parallel
+    par = 0;
     if nargin >= 3
-        if length(varargin == 1)
-            if isboolean(varargin{1})
+        if length(varargin) == 1
+            if varargin{1} == 1 || varargin{1} == 0
                 switch varargin{1}
-                    case true;
+                    case 1;
                         fprintf('Set to plot histograms...\n');
-                        plotON = true;
-                    case false;
-                        plotON = false;
+                        plotON = 1;
+                    case 0;
+                        plotON = 0;
                 end
             else
                 fprintf('3rd arg must be either true or false...\n');
             end
-        elseif length(varargin) == 2)
-            if isboolean(varargin{2})
+        elseif length(varargin) == 2
+            if varargin{2} == 1 || varargin{2} == 0
                 switch varargin{2}
-                    case true;
+                    case 1;
                         fprintf('Executing in parallel...\n');
-                        par = true;
-                    case false;
-                        par = false;
+                        par = 1;
+                    case 0;
+                        par = 0;
                 end
             else
                 fprintf('4th arg must be either true or false...\n');
@@ -47,11 +51,6 @@ function [scores] = scoreFeatures( histograms, labels, varargin)
         else
             fprintf('There are only 2 optional arguments! \n');
         end
-    else
-        %By default we do not plot histograms
-        plotON = false;
-        %By default we do not run in parallel
-        par = false;
     end
     
     %Get number of features
@@ -94,10 +93,10 @@ function [distances] = getDistances(h, l, k, plotON)
     df = sum(hDist);
     
     %============ Differential Amplitude Metric =======================
-    % Take the Battachyra Distance 
-    bDist = -log2(sum(sqrt( positive .* negative )));
+    % Take the Czekanowski  Distance 
+    bDist = sum(abs( positive - negative )) / sum(positive + negative);
     
-    %Differential amplitude is the Battachyra distance
+    %Differential amplitude is the Czekanowski  distance
     da = bDist;
 
     %Report distances
