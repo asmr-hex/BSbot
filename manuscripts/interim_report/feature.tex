@@ -4,7 +4,7 @@
 %Bag-Of-Words and beyond...
 Naturally, when presented with a dataset comprised wholly of text strings, the prevailing response is to employ a \emph{Bag-of-words} approach in feature selection in which a dictionary of chosen words or phrases are used to discriminate between multiple document classes. While this feature selection method certainly has merit, the information it conveys is limited due to the loss of structure imposed during feature transformation. For this reason, we incorporate additional features which preserve some syntactic structure in order to exploit our prior knowledge of context-free grammar.
 
-[Dustin explains syntactic features]
+We also implement a series of lexical parsers.
 
 %Scoring Features
 While carefully premeditating the types of features to include in the final learning system is crucial for an accurate classifier, often it is unclear which features will yield optimal performance. For a binary linear discriminant learner, the accuracy of performance manifests itself as the margin of separability between classes of high dimensional features. Thus, it is absolutely critical to evaluate the candidate features with respect to their separability between classes.
