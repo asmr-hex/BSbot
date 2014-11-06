@@ -28,6 +28,21 @@ public class arXivCrawler {
     private static double[] Times;
 
     public static void main(String[] args){
+        /*Ensure number of arguments is correct*/
+        if (args.length < 1){
+            System.out.println("Usage: \n\tjava -jar arXivCrawler.jar n [resume] \n"
+                                + "\t\tn:\t\t\tnumber of desired data samples\n"
+                                + "\t\t[resume]:\tresume from stoppping point boolean");
+            System.exit(-1);
+        }
+        /*To Do: set up Resume file */
+        else if (args.length == 2){
+            System.out.println("Resuming from _______ ...");
+            System.exit(-1);
+        }
+
+
+
         /*Get number of data points (number of real abstracts) */
         int n = Integer.parseInt(args[0]);
         System.out.println("Finding " + n + " ArXiv abstracts...");

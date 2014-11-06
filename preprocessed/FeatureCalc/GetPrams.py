@@ -1,3 +1,3 @@
 import libPramFetch
 
-libPramFetch.getFeatures(50)
+libPramFetch.getFeatures(500)

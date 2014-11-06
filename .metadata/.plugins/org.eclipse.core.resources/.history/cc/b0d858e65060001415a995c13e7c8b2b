@@ -1,0 +1,16 @@
+#include<iostream>
+
+using namespace std;
+
+int main(int argc, char** argv){
+
+	/*Ensure inputs are correct */
+	if (argc != 3){
+		cout << "Usage: scoreFeatures histograms.txt labels.txt" << endl;
+		return -1;
+	}
+
+	cout<< "Histogram Input: " << argv[1] << endl;
+
+	return 0;
+}
