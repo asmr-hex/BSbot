@@ -5,6 +5,7 @@
 \usepackage{hyperref}
 \usepackage{amssymb}
 \usepackage{epstopdf}
+\usepackage{amsmath}
 \usepackage{url}
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
@@ -30,7 +31,6 @@
 
 \section{Introduction}
 \input{introduction}
-
 %\section{Related Work}
 %\input{literature_review}
 
@@ -41,17 +41,13 @@
 \subsection{Feature Selection}
 \input{feature}
 
-\subsection{Models}
-\input{model}
-
-
 \section{Preliminary Result}
 \input{result}
 
 \section{Conclusion and Future work}
 \input{conclusion}
 
-\bibliographystyle{plain}
-\bibliography{baihu}
+%\bibliographystyle{plain}
+%\bibliography{baihu}
 
 \end{document}

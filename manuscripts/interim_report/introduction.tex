@@ -7,8 +7,4 @@ Both SCIgen and snarXiv have proved that human are not good at distinguishing co
 Therefore, we aim to build a classification mechanism to distinguish machine-generated contents to real, human-produced contents. There are very few publications on this topic. A SCIgen paper detection method was described in this paper by using inter-textual distance (based on bag-of-words) and knn classification method. The author claims it should "hardly" misclassify, but no performance metric is given.
 
 % unfinished
-We focus on paper title and abstract because snarXiv can only generate these two parts. We have crawled and formatted \* arXiv papers and grouped into months, and generated \* snarXiv papers. Currently we use . The classification accuracy is .
-
-We plan to use for the next step, and explore performance variations across time.
-
-This report
+We focus on paper title and abstract because snarXiv can only generate these two parts. Thus far, we have crawled data from arXiv.org, providing positive data points; acquired the source for the snarXiv abstract generator to generate negative data points; developed a framework for informed feature selection; and have begun evaluating our feature transform methods.
