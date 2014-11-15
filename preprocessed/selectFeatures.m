@@ -10,7 +10,7 @@ label_fn = 'labels.txt';
 features_fn = 'features.txt';
 features_info_fn = 'features_info.txt';
 runInparallel = 0;
-plotEachHistogram = 0;
+plotEachHistogram = 1;
 saveHistograms = 1;
 %---------------------------------------------------------
 
@@ -37,6 +37,11 @@ nPositive = nPositive(1:equalNumber);
 nNegative = nNegative(1:equalNumber);
 histograms = histograms(:, [nPositive, nNegative]);
 labels = [ labels(nPositive) , labels(nNegative) ];
+
+%Eliminate obviously bad features (using tf-idf)
+[histograms, labels, info ] = reduceDictionary(histograms, labels, info);
+
+
 
 %Score Features
 scores = scoreFeatures(histograms, labels, info, plotEachHistogram, runInparallel);

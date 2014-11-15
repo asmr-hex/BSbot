@@ -86,8 +86,7 @@ def getFeatures(numFiles):
     featuresTXT = '../features.txt'
     features_infoTXT = '../features_info.txt'
     dictionaryTXT = 'dictionary.txt'
-    snarXivDir = '../../raw/snarXiv/results/'
-    arXivDir = '../../raw/arXiv/results/'
+    trainDir = '../../raw/train/'
 
     allwordstogetherList=[]
     wordCountDictList=[]
@@ -97,9 +96,10 @@ def getFeatures(numFiles):
     #Getting Dictionary
     print "Getting Dictionary..."
     for i in range(0,numFiles):
+        print '%d.txt' % i;
         #complexityList.append(avgSentComplexity('snarXiv/%d.txt' % i))
-        NNList.append(NNCount(snarXivDir + '%d.txt' % i))
-        temp=wordCount(snarXivDir + '%d.txt' % i)
+        NNList.append(NNCount(trainDir + '%d.txt' % i))
+        temp=wordCount(trainDir + '%d.txt' % i)
         allwordstogetherList=allwordstogetherList+temp.keys()
         wordCountDictList.append(temp)
     uniqueWordList=list(set(allwordstogetherList))
@@ -114,7 +114,7 @@ def getFeatures(numFiles):
     labels = codecs.open(labelsTXT, "w", "utf-8")
     labels.close()
     with codecs.open(labelsTXT, "a", "utf-8") as writeLabels:
-        with codecs.open("../../raw/Train/labels.txt", "r" ,"utf-8") as readLabels:
+        with codecs.open(trainDir + "labels.txt", "r" ,"utf-8") as readLabels:
             for k in range(0, numFiles):
                 writeLabels.write(readLabels.readline())
 

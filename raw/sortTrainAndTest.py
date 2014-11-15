@@ -4,13 +4,23 @@
 #sorts 75% into training and 25% into test datasets
 
 import os, shutil, random
+import codecs
 
 negPath = './snarXiv/results/'
 posPath = './arXiv/results/'
 
 #Get list of file names
-negFileNames = os.listdir(negPath)
-posFileNames = os.listdir(posPath)
+negFileNames = []
+#negFileNames = os.listdir(negPath)
+for file in os.listdir(negPath):
+	if file.endswith(".txt"):
+		negFileNames.append(file)
+
+posFileNames = []		
+#posFileNames = os.listdir(posPath)
+for file in os.listdir(posPath):
+	if file.endswith(".txt"):
+		posFileNames.append(file)
 
 #Get the total number of data points, N
 nNeg = len(negFileNames)
