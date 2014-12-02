@@ -10,7 +10,7 @@ label_fn = 'labels.txt';
 features_fn = 'features.txt';
 features_info_fn = 'features_info.txt';
 runInparallel = 0;
-plotEachHistogram = 1;
+plotEachHistogram = 0;
 saveHistograms = 1;
 %---------------------------------------------------------
 
@@ -40,8 +40,6 @@ labels = [ labels(nPositive) , labels(nNegative) ];
 
 %Eliminate obviously bad features (using tf-idf)
 [histograms, labels, info ] = reduceDictionary(histograms, labels, info);
-
-
 
 %Score Features
 scores = scoreFeatures(histograms, labels, info, plotEachHistogram, runInparallel);
@@ -95,13 +93,6 @@ hamming_weight = sign(hammingDistance).*...
 tanimoto_weight = sign(tanimotoDistance).*...
     exp(tanimotoSlope*abs(tanimotoDistance))./tanimotoScale;
 
-%Cap weights at 10 ???????
-% maxWeight = 10;
-% hamming_weight(hamming_weight > maxWeight) = ...
-%     sign(hamming_weight(hamming_weight > maxWeight)) .* maxWeight;
-% tanimoto_weight(tanimoto_weight > maxWeight) = ...
-%     sign(tanimoto_weight(tanimoto_weight > maxWeight)) .* maxWeight;
-
 
 %Output selected features, type of metric weight (Hamming vs. wordCount), weight
 FeatureInfos = [ hammingInfo ; tanimotoInfo ];
@@ -138,10 +129,13 @@ for k = 1:length(Weights)
         plot((length(positive) + 1) .* ones(2,1), [0 maxY+10], 'Color',...
             [138,137, 137]./255, 'LineWidth', 2, 'LineStyle', '--');
         ylim([0 maxY+1]);
+        xlim([0 length(positive)+length(negative)+1]);
         set(gca, 'XTickLabel', {});
         xlabel('Positive vs. Negative Documents', 'FontSize', 18);
         ylabel('Features per Document', 'FontSize', 18);
         title(['Feature: ' FeatureInfos{k}], 'fontsize',18);
+        text(length(positive)+100, maxY-1, [Metrics{k} ': ' num2str(Weights(k))],...
+            'Fontsize',18);
         pause; 
     end
     

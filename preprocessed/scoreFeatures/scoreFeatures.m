@@ -147,7 +147,6 @@ function [distances] = getDistances(h, l, info, k, plotON)
         xlabel('Positive vs. Negative Documents', 'FontSize', 18);
         ylabel('Features per Document', 'FontSize', 18);
         title(['Feature: ' info{k}], 'fontsize',18);
-        distances
         pause(0.5);
     end
     
