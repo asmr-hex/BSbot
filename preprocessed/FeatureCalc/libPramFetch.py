@@ -6,6 +6,10 @@ Created on Nov 4, 2014
 #!/usr/bin/python
 import nltk
 import codecs, os
+from nltk.chunk import *
+from nltk.chunk.util import *
+from nltk.chunk.regexp import *
+from nltk import Tree
 #Get the overall wordcount of a data point
 def wordCount(filename):
     file=codecs.open(filename,"r+", "utf-8")
@@ -57,27 +61,32 @@ def NNCount(filename):
 #!/usr/bin/python
 #Get the Average Sentence complexity of a data point
 def avgSentComplexity(filename):
-    file=codecs.open(filename,"r+", "utf-8")
-    print(file)
-    print(filename)
-    groucho_grammar = nltk.CFG.fromstring("VP^<TOP> -> VBP NP^<VP-TOP>")
-    parser = nltk.ChartParser(groucho_grammar)
-    sentence=[]
-    count=0
-    numSentences=0
-    numofNN=0;
-    for line in file:  #?????
-        line = line.replace("\n", "")
-        sentence.append(line)
-        if(line.strip() != ''):
-            if(line[-1]=='.'):
-                print(line)
-                count=count+(parser.parse(sentence)).count(')')+(parser.parse(sentence)).count('(')
-                sentence=[]
-                numSentences=numSentences+1
-
-    averageComplexity=count/numSentences
-    return averageComplexity
+    file=open(filename,"r+")
+        parser = RegexpParser('''
+            NP: {<DT>? <JJ>* <NN>*} # NP
+            P: {<IN>}           # Preposition
+            V: {<V.*>}          # Verb
+            PP: {<P> <NP>}      # PP -> P NP
+            VP: {<V> <NP|PP>*}  # VP -> V (NP|PP)*
+            ''')
+        sentence=[]
+        count=0
+        numSentences=0
+        numofNN=0;
+        for line in file:  #?????
+            line = line.replace("\n", "")
+            sentence.append(line)
+            if(line.strip() != ''):
+                if(line[-1]=='.'):
+                    sentence="".join(sentence)
+                    tokens = nltk.word_tokenize(sentence)
+                    tagged = nltk.pos_tag(tokens)
+                    count=count+(parser.parse(tagged)).count(')')+(parser.parse(tagged)).count('(')
+                    sentence=[]
+                    numSentences=numSentences+1
+                
+        averageComplexity=count/numSentences
+        return averageComplexity
 
 #This function is used to generate features used for featureSelection from Training Data
 def getFeatures(numFiles):
