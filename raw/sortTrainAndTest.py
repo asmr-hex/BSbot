@@ -12,15 +12,15 @@ posPath = './arXiv/results/'
 #Get list of file names
 negFileNames = []
 #negFileNames = os.listdir(negPath)
-for file in os.listdir(negPath):
-	if file.endswith(".txt"):
-		negFileNames.append(file)
+for fn in os.listdir(negPath):
+	if fn.endswith(".txt"):
+		negFileNames.append(fn)
 
 posFileNames = []		
 #posFileNames = os.listdir(posPath)
-for file in os.listdir(posPath):
-	if file.endswith(".txt"):
-		posFileNames.append(file)
+for fn in os.listdir(posPath):
+	if fn.endswith(".txt"):
+		posFileNames.append(fn)
 
 #Get the total number of data points, N
 nNeg = len(negFileNames)
@@ -69,7 +69,7 @@ for k in range(0, nNeg):
 		testLabelsList[testFileNumbers[ind]] = -1
 		os.system("cp " + negPath + negFileNames[k] + " ./Test/%d.txt" % testFileNumbers[ind])
 		del testFileNumbers[ind]
-	print "Transferring Negative Data: " + str(int(float(k)/float(nNeg) * 100)+1), "%           \r",
+	print "Transferring Negative Data: " + str(int(float(k)/float(nNeg) * 100)), "%           \r",
 print "\nSuccess!"
 
 #Copy positive samples into training and testing directories
@@ -86,7 +86,7 @@ for k in range(0, nPos):
 		testLabelsList[testFileNumbers[ind]] = 1
 		os.system("cp " + posPath + posFileNames[k] + " ./Test/%d.txt" % testFileNumbers[ind])
 		del testFileNumbers[ind]
-	print "Transferring Positive Data: " + str(int(float(k)/float(nPos) * 100)+1), "%           \r",
+	print "Transferring Positive Data: " + str(int(float(k)/float(nPos) * 100)), "%           \r",
 print "\nSuccess!"
 
 #Create labels.txt for training and testing data
@@ -97,9 +97,9 @@ testLabels.close()
 trainLabels = open('./Train/labels.txt', "a")
 testLabels = open('./Test/labels.txt', "a")
 #Write Labels file
-for k in range(0, trainN-1):
+for k in range(0, trainN):
 	trainLabels.write(str(trainLabelsList[k]) + "\n")
-for k in range(0, testN-1):
+for k in range(0, testN):
 	testLabels.write(str(testLabelsList[k]) + "\n")	
 trainLabels.close()
 testLabels.close()

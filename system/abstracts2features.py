@@ -33,7 +33,7 @@ def bagOfWords(abstract, word, weightType, weight):
 	#Return the computed feature
 	return F
 
-def transform(abstract, saveDir, saveName):
+def transform(abstract):
 	#Get extractFeature class
 	extractFeatures = imp.load_source('libPramFetch', '../preprocessed/FeatureCalc/libPramFetch.py')
 	
@@ -64,8 +64,9 @@ def transform(abstract, saveDir, saveName):
 				F = extractFeatures.avgSentComplexity(abstract)
 				F = getWeightedFeature(F, weightType, weight)
 		#Store Feature value in list string
-		FList+= str(F) + '\n'
+		FList+= str(F) + '\t'
+	return FList + '\n'
 	#Save features in a text file in specified directory
-	saveFile = open(saveDir + '/' + saveName, 'w+')
-	saveFile.write(FList)
-	saveFile.close()
+	#saveFile = open(saveDir + '/' + saveName, 'w+')
+	#saveFile.write(FList)
+	#saveFile.close()

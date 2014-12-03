@@ -18,6 +18,8 @@ test = os.listdir(testDir)
 #Total Number of Files to transform
 N = len(train) + len(test)
 n = 0
+trainStr = ''
+testStr = ''
 
 #Generate transformed features for each raw data file
 for fn in train:
@@ -33,20 +35,34 @@ for fn in train:
 			rawFile = trainDir + '/' + fn
 			saveDir = '../data/Train'
 			saveName = fn
-			abstracts2features.transform(rawFile,saveDir,saveName)
+			trainStr += abstracts2features.transform(rawFile)
 	n+=1
 	print "Transforming raw data: " + str(int(float(n)/float(N) * 100)+1), "%           \r",
+#Save Train Data
+saveFile = open(saveDir + '/' + 'Train.txt', 'w+')
+saveFile.write(trainStr)
+saveFile.close()
+
 for fn in test:
 	cmd = 'python abstracts2features.py '
 	if fn.endswith('.txt'):
+		if fn == 'labels.txt':
+			cp = 'cp ' + testDir + '/' + fn 
+			cp+= ' ../data/Test/' + fn
+			os.system(cp)
+		else:
 			#cmd += testDir + '/' + fn + ' ../data/Test ' + fn 
 			#os.system(cmd)	
 			rawFile = testDir + '/' + fn
 			saveDir = '../data/Test'
 			saveName = fn
-			abstracts2features.transform(rawFile,saveDir,saveName)		
+			testStr += abstracts2features.transform(rawFile)		
 	n+=1
 	print "Transforming raw data: " + str(int(float(n)/float(N) * 100)+1), "%           \r",
+#Save Test Data
+saveFile = open(saveDir + '/' + 'Test.txt', 'w+')
+saveFile.write(testStr)
+saveFile.close()
 print "Success!\n"		
 
 
