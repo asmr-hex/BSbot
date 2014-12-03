@@ -62,31 +62,31 @@ def NNCount(filename):
 #Get the Average Sentence complexity of a data point
 def avgSentComplexity(filename):
     file=open(filename,"r+")
-        parser = RegexpParser('''
-            NP: {<DT>? <JJ>* <NN>*} # NP
-            P: {<IN>}           # Preposition
-            V: {<V.*>}          # Verb
-            PP: {<P> <NP>}      # PP -> P NP
-            VP: {<V> <NP|PP>*}  # VP -> V (NP|PP)*
-            ''')
-        sentence=[]
-        count=0
-        numSentences=0
-        numofNN=0;
-        for line in file:  #?????
-            line = line.replace("\n", "")
-            sentence.append(line)
-            if(line.strip() != ''):
-                if(line[-1]=='.'):
-                    sentence="".join(sentence)
-                    tokens = nltk.word_tokenize(sentence)
-                    tagged = nltk.pos_tag(tokens)
-                    count=count+(parser.parse(tagged)).count(')')+(parser.parse(tagged)).count('(')
-                    sentence=[]
-                    numSentences=numSentences+1
-                
-        averageComplexity=count/numSentences
-        return averageComplexity
+    parser = RegexpParser('''
+        NP: {<DT>? <JJ>* <NN>*} # NP
+        P: {<IN>}           # Preposition
+        V: {<V.*>}          # Verb
+        PP: {<P> <NP>}      # PP -> P NP
+        VP: {<V> <NP|PP>*}  # VP -> V (NP|PP)*
+        ''')
+    sentence=[]
+    count=0
+    numSentences=0
+    numofNN=0;
+    for line in file:  #?????
+        line = line.replace("\n", "")
+        sentence.append(line)
+        if(line.strip() != ''):
+            if(line[-1]=='.'):
+                sentence="".join(sentence)
+                tokens = nltk.word_tokenize(sentence)
+                tagged = nltk.pos_tag(tokens)
+                count=count+(parser.parse(tagged)).count(')')+(parser.parse(tagged)).count('(')
+                sentence=[]
+                numSentences=numSentences+1
+
+    averageComplexity=count/numSentences
+    return averageComplexity
 
 #This function is used to generate features used for featureSelection from Training Data
 def getFeatures(numFiles):
@@ -106,7 +106,7 @@ def getFeatures(numFiles):
     print "Getting Dictionary..."
     for i in range(0,numFiles):
         print '%d.txt' % i;
-        #complexityList.append(avgSentComplexity('snarXiv/%d.txt' % i))
+        ComplexityList.append(avgSentComplexity(trainDir + '%d.txt' % iC))
         NNList.append(NNCount(trainDir + '%d.txt' % i))
         temp=wordCount(trainDir + '%d.txt' % i)
         allwordstogetherList=allwordstogetherList+temp.keys()
@@ -131,6 +131,7 @@ def getFeatures(numFiles):
     feat_info = codecs.open(features_infoTXT, "w", "utf-8")
     feat_info.close()
     with codecs.open(features_infoTXT, "a", "utf-8") as feat_info:
+        feat_info.write("syntax\t" + "Complexity\n")
         feat_info.write("syntax\t" + "NN\n")
         for word in uniqueWordList:
             feat_info.write("BoW\t" + word +"\n")
@@ -141,7 +142,7 @@ def getFeatures(numFiles):
     feat.close()
     with codecs.open(featuresTXT, "a","utf-8") as f2:
         for i3 in range(0,numFiles):
-            #f2.write('%(Complexity)d %(NN)d ' %{"Complexity": complexityList(2*i3), "NN": NNList(i3)})
+            f2.write('%(Complexity)d' %{"Complexity": ComplexityList[i3]})
             f2.write('%(NN)d ' %{"NN": NNList[i3]})
             for word in uniqueWordList:
                 tempDict=wordCountDictList[i3]
@@ -151,4 +152,3 @@ def getFeatures(numFiles):
                     f2.write('0 ')
 
             f2.write('\n')
-
